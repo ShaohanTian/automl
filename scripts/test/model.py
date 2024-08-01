@@ -21,7 +21,7 @@ pd.set_option('display.max_rows', None)
 output_dir = './trd_ml_output/'
 
 def load_exp_data(pred_prop='Tensile_value', split_ratio=0.8, seed=666, add=False):
-    df = pd.read_excel('./data.xlsx')
+    df = pd.read_excel('./../data/data.xlsx')
     if not add:
         df.drop(columns=['热锻/℃'], inplace=True)
 
@@ -61,8 +61,8 @@ def save_results(path, headers, metrics, params):
     with open(path, 'a+', newline='') as csvfile:
         csvwriter = csv.writer(csvfile)
         csvwriter.writerow(headers)
-        csvwriter.writerow([metrics[f'{key}_mean'] for key in headers[:4]] + 
-                           [metrics[f'{key}_std'] for key in headers[:4]] + 
+        csvwriter.writerow([metrics[f'{key}_mean'] for key in headers[:4]] +
+                           [metrics[f'{key}_std'] for key in headers[:4]] +
                            [params[key] for key in params])
 
 def run_regressor(target, regressor_name, param_grid):
